@@ -1,3 +1,0 @@
-# art-gallery
-
-Belajar ThreeJS
