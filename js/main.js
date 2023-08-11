@@ -1,4 +1,6 @@
 // console.log("Three Object Here", THREE);
+
+
 // Scene
 const scene = new THREE.Scene(); // create the scene
 
@@ -39,16 +41,24 @@ scene.add(cube);
 document.addEventListener("keydown", onKeyDown, false);
 
 // Texture of floor
+// let floorTexture = new THREE.ImageUtils.loadTexture("img/Floor.jpg"); // ImageUtils is deprecated in the newer of THREE.js
 let floorTexture = new THREE.TextureLoader().load('img/Floor.jpg');
+floorTexture.wrapS = THREE.RepeatWrapping; // wrapS is horizontal direction
+floorTexture.wrapT = THREE.RepeatWrapping; // wrapT is vertical direction
+floorTexture.repeat.set(20,20); // how many times to repeat the Texture
 
 // Create the floor plane. 
-let planeGeometry = new THREE.PlaneBufferGeometry(50, 50); // BoxGeometry is the shape of the object
+let planeGeometry = new THREE.PlaneGeometry(50, 50); // BoxGeometry is the shape of the object
 let planeMaterial = new THREE.MeshBasicMaterial({
     map: floorTexture,
     side: THREE.DoubleSide,
 });
 
 let floorPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+
+floorPlane.rotation.x = Math.PI / 2;// this is 90 degrees 
+floorPlane.position.y = -Math.PI // this is 180 degrees
+
 scene.add(floorPlane);
 
 // function when a key is pressed, execute this function
